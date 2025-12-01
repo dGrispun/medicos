@@ -72,10 +72,10 @@ export function AppointmentForm({
 
   if (!showForm) {
     return (
-      <div className="mb-8">
+      <div className="mb-3">
         <button
           onClick={() => setShowForm(true)}
-          className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-colors"
+          className="w-full py-2 px-4 text-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md shadow-sm transition-colors"
         >
           + Agregar Nuevo Turno para {patient}
         </button>
@@ -84,14 +84,14 @@ export function AppointmentForm({
   }
 
   return (
-    <div className="mb-8 bg-white border-2 border-blue-500 rounded-lg p-6 shadow-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+    <div className="mb-3 bg-white border-2 border-blue-500 rounded-md p-3 shadow-md">
+      <h2 className="text-lg font-bold text-gray-800 mb-2">
         {editingAppointment ? "Editar Turno" : `Nuevo Turno para ${patient}`}
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <form onSubmit={handleSubmit} className="space-y-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
               Especialidad *
             </label>
             <input
@@ -102,11 +102,11 @@ export function AppointmentForm({
                 setFormData({ ...formData, speciality: e.target.value })
               }
               placeholder="Ej: Flebólogo, Cardiólogo"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
               Estudio / Tipo *
             </label>
             <input
@@ -117,14 +117,14 @@ export function AppointmentForm({
                 setFormData({ ...formData, studyType: e.target.value })
               }
               placeholder="Ej: Rayos X, Ecografía"
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
               Fecha *
             </label>
             <input
@@ -134,11 +134,11 @@ export function AppointmentForm({
               onChange={(e) =>
                 setFormData({ ...formData, date: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-700 mb-1">
               Hora *
             </label>
             <input
@@ -148,13 +148,13 @@ export function AppointmentForm({
               onChange={(e) =>
                 setFormData({ ...formData, time: e.target.value })
               }
-              className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
             Ubicación *
           </label>
           <input
@@ -165,12 +165,12 @@ export function AppointmentForm({
               setFormData({ ...formData, location: e.target.value })
             }
             placeholder="Hospital / Clínica / Dirección"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
             Teléfono *
           </label>
           <input
@@ -181,12 +181,12 @@ export function AppointmentForm({
               setFormData({ ...formData, phone: e.target.value })
             }
             placeholder="Número de contacto"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
             Notas (opcional)
           </label>
           <textarea
@@ -195,22 +195,22 @@ export function AppointmentForm({
               setFormData({ ...formData, notes: e.target.value })
             }
             placeholder="Información adicional..."
-            rows={3}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            rows={2}
+            className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
-        <div className="flex gap-3 pt-2">
+        <div className="flex gap-2 pt-1">
           <button
             type="submit"
-            className="flex-1 py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-colors"
+            className="flex-1 py-2 px-4 text-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md transition-colors"
           >
             {editingAppointment ? "Guardar Cambios" : "Agregar Turno"}
           </button>
           <button
             type="button"
             onClick={handleCancel}
-            className="flex-1 py-3 px-6 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-md transition-colors"
+            className="flex-1 py-2 px-4 text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-md transition-colors"
           >
             Cancelar
           </button>

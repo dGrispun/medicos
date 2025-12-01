@@ -7,10 +7,10 @@ interface PatientSelectorProps {
 
 export function PatientSelector({ selectedPatient, onSelectPatient }: PatientSelectorProps) {
   return (
-    <div className="flex gap-4 mb-8">
+    <div className="flex gap-2 mb-3">
       <button
         onClick={() => onSelectPatient("Caro")}
-        className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-all ${
+        className={`flex-1 py-2 px-4 text-sm rounded-md font-semibold transition-all ${
           selectedPatient === "Caro"
             ? "bg-blue-600 text-white shadow-lg"
             : "bg-gray-100 text-gray-700 hover:bg-gray-200"
@@ -20,7 +20,7 @@ export function PatientSelector({ selectedPatient, onSelectPatient }: PatientSel
       </button>
       <button
         onClick={() => onSelectPatient("Daro")}
-        className={`flex-1 py-3 px-6 rounded-lg font-semibold transition-all ${
+        className={`flex-1 py-2 px-4 text-sm rounded-md font-semibold transition-all ${
           selectedPatient === "Daro"
             ? "bg-blue-600 text-white shadow-lg"
             : "bg-gray-100 text-gray-700 hover:bg-gray-200"

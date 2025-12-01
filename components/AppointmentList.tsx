@@ -41,9 +41,9 @@ export function AppointmentList({
   return (
     <div>
       {/* Filters */}
-      <div className="mb-6 flex flex-col sm:flex-row gap-4">
+      <div className="mb-3 flex flex-col sm:flex-row gap-2">
         <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-xs font-medium text-gray-700 mb-1">
             Filtrar por estado
           </label>
           <select
@@ -65,7 +65,7 @@ export function AppointmentList({
           <select
             value={filterSpeciality}
             onChange={(e) => onFilterSpecialityChange(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           >
             <option value="all">Todas</option>
             {availableSpecialities.map((spec) => (
@@ -79,8 +79,8 @@ export function AppointmentList({
 
       {/* Pending Appointments */}
       {(filterStatus === "all" || filterStatus === "pending") && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+        <div className="mb-4">
+          <h2 className="text-lg font-bold text-gray-800 mb-2">
             📋 Turnos Pendientes ({pendingAppointments.length})
           </h2>
           {pendingAppointments.length === 0 ? (
@@ -110,7 +110,7 @@ export function AppointmentList({
       {/* Completed Appointments */}
       {(filterStatus === "all" || filterStatus === "done") && (
         <div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+          <h2 className="text-lg font-bold text-gray-800 mb-2">
             ✅ Turnos Completados ({completedAppointments.length})
           </h2>
           {completedAppointments.length === 0 ? (
