@@ -84,14 +84,14 @@ export function AppointmentForm({
   }
 
   return (
-    <div className="mb-3 bg-white border-2 border-blue-500 rounded-md p-3 shadow-md">
-      <h2 className="text-lg font-bold text-gray-800 mb-2">
+    <div className="mb-3 bg-gray-800 border-2 border-blue-600 rounded-md p-3 shadow-md">
+      <h2 className="text-lg font-bold text-gray-200 mb-2">
         {editingAppointment ? "Editar Turno" : `Nuevo Turno para ${patient}`}
       </h2>
       <form onSubmit={handleSubmit} className="space-y-2">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-300 mb-1">
               Especialidad *
             </label>
             <input
@@ -102,11 +102,11 @@ export function AppointmentForm({
                 setFormData({ ...formData, speciality: e.target.value })
               }
               placeholder="Ej: Flebólogo, Cardiólogo"
-              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm bg-gray-900 text-gray-200 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-300 mb-1">
               Estudio / Tipo *
             </label>
             <input
@@ -117,14 +117,14 @@ export function AppointmentForm({
                 setFormData({ ...formData, studyType: e.target.value })
               }
               placeholder="Ej: Rayos X, Ecografía"
-              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm bg-gray-900 text-gray-200 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-300 mb-1">
               Fecha *
             </label>
             <input
@@ -134,11 +134,11 @@ export function AppointmentForm({
               onChange={(e) =>
                 setFormData({ ...formData, date: e.target.value })
               }
-              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm bg-gray-900 text-gray-200 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
           <div>
-            <label className="block text-xs font-medium text-gray-700 mb-1">
+            <label className="block text-xs font-medium text-gray-300 mb-1">
               Hora *
             </label>
             <input
@@ -148,13 +148,13 @@ export function AppointmentForm({
               onChange={(e) =>
                 setFormData({ ...formData, time: e.target.value })
               }
-              className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-2 py-1 text-sm bg-gray-900 text-gray-200 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-300 mb-1">
             Ubicación *
           </label>
           <input
@@ -165,12 +165,12 @@ export function AppointmentForm({
               setFormData({ ...formData, location: e.target.value })
             }
             placeholder="Hospital / Clínica / Dirección"
-            className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-2 py-1 text-sm bg-gray-900 text-gray-200 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-300 mb-1">
             Teléfono *
           </label>
           <input
@@ -181,12 +181,12 @@ export function AppointmentForm({
               setFormData({ ...formData, phone: e.target.value })
             }
             placeholder="Número de contacto"
-            className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-2 py-1 text-sm bg-gray-900 text-gray-200 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-gray-700 mb-1">
+          <label className="block text-xs font-medium text-gray-300 mb-1">
             Notas (opcional)
           </label>
           <textarea
@@ -196,7 +196,7 @@ export function AppointmentForm({
             }
             placeholder="Información adicional..."
             rows={2}
-            className="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="w-full px-2 py-1 text-sm bg-gray-900 text-gray-200 border border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
 
@@ -210,7 +210,7 @@ export function AppointmentForm({
           <button
             type="button"
             onClick={handleCancel}
-            className="flex-1 py-2 px-4 text-sm bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-md transition-colors"
+            className="flex-1 py-2 px-4 text-sm bg-gray-700 hover:bg-gray-600 text-gray-200 font-semibold rounded-md transition-colors"
           >
             Cancelar
           </button>

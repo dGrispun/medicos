@@ -13,7 +13,7 @@ export function PatientSelector({ selectedPatient, onSelectPatient }: PatientSel
         className={`flex-1 py-2 px-4 text-sm rounded-md font-semibold transition-all ${
           selectedPatient === "Caro"
             ? "bg-blue-600 text-white shadow-lg"
-            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            : "bg-gray-700 text-gray-300 hover:bg-gray-600"
         }`}
       >
         Caro
@@ -23,7 +23,7 @@ export function PatientSelector({ selectedPatient, onSelectPatient }: PatientSel
         className={`flex-1 py-2 px-4 text-sm rounded-md font-semibold transition-all ${
           selectedPatient === "Daro"
             ? "bg-blue-600 text-white shadow-lg"
-            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            : "bg-gray-700 text-gray-300 hover:bg-gray-600"
         }`}
       >
         Daro

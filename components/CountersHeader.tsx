@@ -12,7 +12,7 @@ export function CountersHeader({
   nextAppointment,
 }: CountersHeaderProps) {
   return (
-    <div className="bg-gradient-to-r from-blue-500 to-blue-600 text-white p-3 rounded-md shadow-md mb-3">
+    <div className="bg-gradient-to-r from-blue-700 to-blue-800 text-white p-3 rounded-md shadow-md mb-3">
       <h1 className="text-xl font-bold mb-2">Turnos Médicos - {patientName}</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
         <div className="bg-white/10 backdrop-blur-sm rounded-md p-2">
