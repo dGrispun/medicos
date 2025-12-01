@@ -13,6 +13,24 @@ export interface Appointment {
   location: string;
   phone: string;
   notes?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+// Database type (snake_case for Supabase)
+export interface AppointmentDB {
+  id: string;
+  patient: Patient;
+  speciality: string;
+  study_type: string;
+  status: Status;
+  date: string;
+  time: string;
+  location: string;
+  phone: string;
+  notes?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface AppointmentFormData {

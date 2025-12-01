@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Appointment, Patient, Status, AppointmentFormData } from "@/types/appointments";
-import { usePersistentState } from "@/hooks/usePersistentState";
+import { appointmentsApi } from "@/lib/supabase";
 import { PatientSelector } from "@/components/PatientSelector";
 import { CountersHeader } from "@/components/CountersHeader";
 import { AppointmentForm } from "@/components/AppointmentForm";
@@ -87,15 +87,44 @@ const getInitialAppointments = (): Appointment[] => {
 };
 
 export default function Home() {
-  const [appointments, setAppointments] = usePersistentState<Appointment[]>(
-    "medical-appointments-v1",
-    getInitialAppointments()
-  );
-  
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [loading, setLoading] = useState(true);
   const [selectedPatient, setSelectedPatient] = useState<Patient>("Caro");
   const [editingAppointment, setEditingAppointment] = useState<Appointment | null>(null);
   const [filterStatus, setFilterStatus] = useState<Status | "all">("all");
   const [filterSpeciality, setFilterSpeciality] = useState<string>("all");
+
+  // Load appointments from Supabase on mount
+  useEffect(() => {
+    loadAppointments();
+
+    // Subscribe to real-time updates
+    const subscription = appointmentsApi.subscribeToChanges(() => {
+      loadAppointments();
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, []);
+
+  const loadAppointments = async () => {
+    setLoading(true);
+    const data = await appointmentsApi.getAll();
+    
+    // If no data exists, seed with initial data
+    if (data.length === 0) {
+      const initialData = getInitialAppointments();
+      for (const apt of initialData) {
+        await appointmentsApi.create(apt);
+      }
+      const newData = await appointmentsApi.getAll();
+      setAppointments(newData);
+    } else {
+      setAppointments(data);
+    }
+    setLoading(false);
+  };
 
   // Filter appointments for the selected patient
   const patientAppointments = useMemo(
@@ -141,38 +170,31 @@ export default function Home() {
   }, [patientAppointments]);
 
   // Toggle appointment status
-  const handleToggleStatus = (id: string) => {
-    setAppointments((prev) =>
-      prev.map((apt) =>
-        apt.id === id
-          ? { ...apt, status: apt.status === "pending" ? "done" : "pending" }
-          : apt
-      )
-    );
+  const handleToggleStatus = async (id: string) => {
+    const appointment = appointments.find(apt => apt.id === id);
+    if (!appointment) return;
+
+    const newStatus = appointment.status === "pending" ? "done" : "pending";
+    await appointmentsApi.update(id, { status: newStatus });
+    await loadAppointments();
   };
 
   // Save new or edited appointment
-  const handleSaveAppointment = (data: AppointmentFormData) => {
+  const handleSaveAppointment = async (data: AppointmentFormData) => {
     if (editingAppointment) {
       // Edit existing
-      setAppointments((prev) =>
-        prev.map((apt) =>
-          apt.id === editingAppointment.id
-            ? { ...apt, ...data }
-            : apt
-        )
-      );
+      await appointmentsApi.update(editingAppointment.id, data);
       setEditingAppointment(null);
     } else {
       // Create new
-      const newAppointment: Appointment = {
-        id: Date.now().toString(),
+      const newAppointment = {
         patient: selectedPatient,
         ...data,
-        status: "pending",
+        status: "pending" as Status,
       };
-      setAppointments((prev) => [...prev, newAppointment]);
+      await appointmentsApi.create(newAppointment);
     }
+    await loadAppointments();
   };
 
   // Start editing an appointment
@@ -186,11 +208,20 @@ export default function Home() {
   };
 
   // Delete appointment
-  const handleDeleteAppointment = (id: string) => {
+  const handleDeleteAppointment = async (id: string) => {
     if (confirm("¿Estás seguro de que quieres eliminar este turno?")) {
-      setAppointments((prev) => prev.filter((apt) => apt.id !== id));
+      await appointmentsApi.delete(id);
+      await loadAppointments();
     }
   };
+
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-3 px-2 sm:px-4 flex items-center justify-center">
+        <div className="text-white text-xl">Cargando turnos...</div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-3 px-2 sm:px-4">
