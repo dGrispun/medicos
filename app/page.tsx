@@ -7,6 +7,7 @@ import { PatientSelector } from "@/components/PatientSelector";
 import { CountersHeader } from "@/components/CountersHeader";
 import { AppointmentForm } from "@/components/AppointmentForm";
 import { AppointmentList } from "@/components/AppointmentList";
+import { CalendarView } from "@/components/CalendarView";
 
 // Initial sample data
 const getInitialAppointments = (): Appointment[] => {
@@ -224,38 +225,60 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-3 px-2 sm:px-4">
-      <div className="max-w-7xl mx-auto">
-        <PatientSelector
-          selectedPatient={selectedPatient}
-          onSelectPatient={setSelectedPatient}
-        />
+    <main className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800">
+      <div className="flex h-screen">
+        {/* Sidebar izquierda */}
+        <div className="w-64 bg-gray-800 border-r border-gray-700 p-3 overflow-y-auto">
+          <div className="mb-4">
+            <h1 className="text-lg font-bold text-white mb-1">Turnos Médicos</h1>
+            <p className="text-xs text-gray-400">Gestión de citas</p>
+          </div>
+          
+          <PatientSelector
+            selectedPatient={selectedPatient}
+            onSelectPatient={setSelectedPatient}
+          />
 
-        <CountersHeader
-          patientName={selectedPatient}
-          pendingCount={pendingCount}
-          completedCount={completedCount}
-          nextAppointment={nextAppointment}
-        />
+          <div className="my-4 border-t border-gray-700"></div>
 
-        <AppointmentForm
-          patient={selectedPatient}
-          editingAppointment={editingAppointment}
-          onSave={handleSaveAppointment}
-          onCancel={handleCancelEdit}
-        />
+          <CountersHeader
+            patientName={selectedPatient}
+            pendingCount={pendingCount}
+            completedCount={completedCount}
+            nextAppointment={nextAppointment}
+          />
 
-        <AppointmentList
-          appointments={patientAppointments}
-          filterStatus={filterStatus}
-          filterSpeciality={filterSpeciality}
-          onToggleStatus={handleToggleStatus}
-          onEdit={handleEditAppointment}
-          onDelete={handleDeleteAppointment}
-          onFilterStatusChange={setFilterStatus}
-          onFilterSpecialityChange={setFilterSpeciality}
-          availableSpecialities={availableSpecialities}
-        />
+          <div className="my-4 border-t border-gray-700"></div>
+
+          <CalendarView 
+            appointments={patientAppointments}
+            onSelectAppointment={handleEditAppointment}
+          />
+        </div>
+
+        {/* Contenido principal */}
+        <div className="flex-1 overflow-y-auto p-4">
+          <div className="max-w-6xl mx-auto">
+            <AppointmentForm
+              patient={selectedPatient}
+              editingAppointment={editingAppointment}
+              onSave={handleSaveAppointment}
+              onCancel={handleCancelEdit}
+            />
+
+            <AppointmentList
+              appointments={patientAppointments}
+              filterStatus={filterStatus}
+              filterSpeciality={filterSpeciality}
+              onToggleStatus={handleToggleStatus}
+              onEdit={handleEditAppointment}
+              onDelete={handleDeleteAppointment}
+              onFilterStatusChange={setFilterStatus}
+              onFilterSpecialityChange={setFilterSpeciality}
+              availableSpecialities={availableSpecialities}
+            />
+          </div>
+        </div>
       </div>
     </main>
   );

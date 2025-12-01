@@ -12,20 +12,22 @@ export function CountersHeader({
   nextAppointment,
 }: CountersHeaderProps) {
   return (
-    <div className="bg-gradient-to-r from-blue-700 to-blue-800 text-white p-3 rounded-md shadow-md mb-3">
-      <h1 className="text-xl font-bold mb-2">Turnos Médicos - {patientName}</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
-        <div className="bg-white/10 backdrop-blur-sm rounded-md p-2">
-          <div className="text-xs opacity-90">Pendientes</div>
-          <div className="text-2xl font-bold">{pendingCount}</div>
+    <div className="bg-gray-900 text-white p-3 rounded-md border border-gray-700">
+      <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">
+        Resumen - {patientName}
+      </h3>
+      <div className="space-y-2">
+        <div className="flex items-center justify-between p-2 bg-gray-800 rounded">
+          <div className="text-xs text-gray-400">Pendientes</div>
+          <div className="text-lg font-bold text-yellow-400">{pendingCount}</div>
         </div>
-        <div className="bg-white/10 backdrop-blur-sm rounded-md p-2">
-          <div className="text-xs opacity-90">Completados</div>
-          <div className="text-2xl font-bold">{completedCount}</div>
+        <div className="flex items-center justify-between p-2 bg-gray-800 rounded">
+          <div className="text-xs text-gray-400">Completados</div>
+          <div className="text-lg font-bold text-green-400">{completedCount}</div>
         </div>
-        <div className="bg-white/10 backdrop-blur-sm rounded-md p-2">
-          <div className="text-xs opacity-90">Próximo Turno</div>
-          <div className="text-sm font-semibold">
+        <div className="p-2 bg-gray-800 rounded">
+          <div className="text-xs text-gray-400 mb-1">Próximo Turno</div>
+          <div className="text-sm font-semibold text-blue-400">
             {nextAppointment || "Sin turnos"}
           </div>
         </div>
